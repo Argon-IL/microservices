@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install package
+      apt: 
+        pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+        update_cache: yes
+    - name: add apt-key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Work out the distribution
+      command: lsb_release -sc
+      register: result
+    - name: add repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ result.stdout }} stable
+        state: present
+    - name: install docker
+      apt: 
+        pkg:
+        - docker-ce
+        - containerd.io
+        - docker-compose
+        update_cache: yes
+    - name: copy docker-compose.yml
+      copy:
+        src: ../files/temp/docker-compose.yml
+        dest: /srv/gitlab/
+        owner: argon
+        mode: '0644'
+    - name: add group for user argon
+      user:
+        name: argon
+        group: docker
