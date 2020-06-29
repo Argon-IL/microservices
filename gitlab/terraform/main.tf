@@ -21,7 +21,7 @@ resource "google_compute_instance" "gitlab_machine" {
 		}
 	}
 	
-		boot_disk {
+	boot_disk {
 		initialize_params { image = "ubuntu-1604-lts" }
 	}
 	
