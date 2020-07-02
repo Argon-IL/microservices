@@ -1,0 +1,8 @@
+REPOSITORY                  TAG                 IMAGE ID            CREATED              SIZE
+mleonovvv/ubuntu-tmp-file   latest              04ddeea928d5        About a minute ago   113MB
+ubuntu                      16.04               0b1edfbffd27        5 weeks ago          113MB
+express42/otus-homeworks    latest              67f621224e40        5 weeks ago          895MB
+hello-world                 latest              e38bc07ac18e        7 weeks ago          1.85kB
+
+У образа есть слои и дочерний объект - контейнер
+У контйнера есть конфигурация системы и родительский объект - образ
